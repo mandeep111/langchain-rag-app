@@ -1,5 +1,5 @@
 from langchain.chains import RetrievalQA
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 from app.services.vector_store import get_vector_store
 from app.core.config import settings
 

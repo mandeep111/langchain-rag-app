@@ -10,3 +10,6 @@ slowapi
 aiohttp
 aioredis
 python-multipart
+loguru
+pytest
+httpx

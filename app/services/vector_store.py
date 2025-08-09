@@ -1,7 +1,7 @@
 import os
 from typing import List
-from langchain.vectorstores import Chroma
-from langchain.docstore.document import Document
+from langchain_community.vectorstores import Chroma
+from langchain_community.docstore.document import Document
 from app.core.embedding import get_embedding_model
 
 # Path to persist the vector DB

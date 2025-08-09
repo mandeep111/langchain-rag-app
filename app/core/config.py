@@ -12,6 +12,7 @@ class Settings:
     REDIS_URL = os.getenv("REDIS_URL", "")
     API_KEYS = [k.strip() for k in os.getenv("API_KEYS", "").split(",") if k.strip()]
     CORS_ORIGINS = [o.strip() for o in os.getenv("CORS_ORIGINS", "").split(",") if o.strip()]
+    LOG_LEVEL = os.getenv("LOG_LEVEL", "info")
 
 
 settings = Settings()

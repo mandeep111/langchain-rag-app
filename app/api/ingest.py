@@ -7,6 +7,9 @@ from app.services.document import extract_text, chunk_text
 from app.services.vector_store import add_documents_to_vector_store
 from app.core.config import settings
 from app.core.security import get_api_key
+from app.utils.tokens import count_tokens
+from app.utils.logger import logger
+
 
 router = APIRouter(prefix="/documents", tags=["Document Ingestion"])
 
@@ -20,7 +23,9 @@ async def upload_document(
     file: UploadFile = File(...),
     api_key: str = Security(get_api_key)
 ):
+    logger.info(f"Received file upload request: {file.filename}")
     limiter = request.app.state.limiter
+    request_id = getattr(request.state, "request_id", "-")
     # Apply rate limiting programmatically
     await limiter.limit(UPLOAD_LIMIT)(lambda req: None)(request)  # Raises 429 if limit exceeded
 
@@ -36,6 +41,8 @@ async def upload_document(
 
     try:
         text = extract_text(temp_path, ext)
+        token_count = count_tokens(text)
+        logger.info(f"Extracted text tokens={token_count}", extra={"request_id": request_id})
         if not text.strip():
             raise ValueError("No text extracted from the file.")
 
