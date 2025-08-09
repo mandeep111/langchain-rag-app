@@ -14,6 +14,7 @@ app = FastAPI(
 app.include_router(ingest.router)
 app.include_router(query.router)
 
+
 @app.get("/")
 def root():
     return {"message": "RAG API is running!"}
