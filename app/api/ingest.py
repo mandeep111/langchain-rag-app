@@ -1,11 +1,10 @@
-# app/api/ingest.py
-
 import os
 import uuid
 from fastapi import APIRouter, UploadFile, File, HTTPException
-from fastapi.responses import JSONResponse
 from app.models.schemas import UploadResponse
 from app.services.document import extract_text, chunk_text
+from app.services.vector_store import add_documents_to_vector_store
+
 
 router = APIRouter(prefix="/documents", tags=["Document Ingestion"])
 
@@ -30,9 +29,15 @@ async def upload_document(file: UploadFile = File(...)):
             raise ValueError("No text extracted from the file.")
 
         chunks = chunk_text(text)
-        num_chunks = len(chunks)
 
-        return UploadResponse(message="Document processed and chunked", num_chunks=num_chunks)
+        # ✅ Store in vector DB
+        metadata = {
+            "source": file.filename,
+            "type": ext
+        }
+        add_documents_to_vector_store(chunks, metadata)
+
+        return UploadResponse(message="Document processed and stored", num_chunks=len(chunks))
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

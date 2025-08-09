@@ -1,5 +1,3 @@
-# app/services/document.py
-
 import pdfplumber
 import docx
 from langchain.text_splitter import RecursiveCharacterTextSplitter
