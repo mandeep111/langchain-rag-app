@@ -1,8 +1,9 @@
 fastapi
-uvicorn
+uvicorn[standard]
+python-dotenv
 langchain
-openai
 chromadb
+openai
 pydantic
-python-multipart
+tiktoken
 slowapi

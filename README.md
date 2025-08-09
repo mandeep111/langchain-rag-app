@@ -44,6 +44,34 @@ To let users ask questions and get context-aware answers based on uploaded docum
 Includes:
 Query endpoint (FastAPI)
 
+🧩 Chunking & Tokenization Strategy
+We'll use LangChain's RecursiveCharacterTextSplitter:
+
+Ideal chunk size: 512-1000 characters
+
+Overlap: 20-50 characters
+
+Goal: Minimize context loss between chunks
+
+Optional: Token-based splitting using tiktoken (more precise for OpenAI).
+
+🧠 Embedding Model Options
+You can use:
+
+HuggingFace Embeddings (free, local) – good for self-hosted
+
+OpenAI Embeddings – better quality, requires API key
+
+We’ll default to HuggingFace (like all-MiniLM-L6-v2) to keep it free.
+
+🧪 LLM for Answering
+Use OpenAI, Anthropic, or a local model like GPT4All
+
+Initially, we’ll use OpenAI GPT-3.5 for best performance
+
+We'll use RetrievalQA or ConversationalRetrievalChain from LangChain
+
+
 Retrieval from vector store
 
 LLM chain with LangChain (RetrievalQA or ConversationalRetrievalChain)
