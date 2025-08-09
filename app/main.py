@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app.api import ingest
 from app.core.config import settings
 
 app = FastAPI(
@@ -6,6 +7,8 @@ app = FastAPI(
     description="Upload documents and query them using LLM",
     version="1.0.0"
 )
+
+app.include_router(ingest.router)
 
 @app.get("/")
 def root():
