@@ -1,7 +1,9 @@
-
+import os
 from fastapi import FastAPI
-from app.api import ingest
+from app.api import ingest, query
 from app.core.config import settings
+
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 app = FastAPI(
     title="LangChain RAG API",
@@ -10,6 +12,7 @@ app = FastAPI(
 )
 
 app.include_router(ingest.router)
+app.include_router(query.router)
 
 @app.get("/")
 def root():
