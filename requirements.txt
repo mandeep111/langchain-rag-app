@@ -7,3 +7,6 @@ openai
 pydantic
 tiktoken
 slowapi
+aiohttp
+aioredis
+python-multipart
