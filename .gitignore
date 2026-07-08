@@ -7,6 +7,8 @@ __pycache__/
 
 # Virtual environment
 venv/
+.venv/
+.env
 
 # OS-specific files
 .DS_Store
@@ -17,3 +19,9 @@ venv/
 
 # Local vector store directory
 vector_store/
+chroma_db/
+storage/
+
+# Test/runtime artifacts
+.pytest_cache/
+.coverage

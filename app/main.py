@@ -1,6 +1,6 @@
 import os
 from fastapi import FastAPI
-from app.api import ingest, query
+from app.api import ingest, ingestion_jobs, query
 from app.core.config import settings
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -12,6 +12,7 @@ app = FastAPI(
 )
 
 app.include_router(ingest.router)
+app.include_router(ingestion_jobs.router)
 app.include_router(query.router)
 
 
